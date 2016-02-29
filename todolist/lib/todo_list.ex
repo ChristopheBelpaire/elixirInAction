@@ -1,7 +1,15 @@
 defmodule TodoList do 
 	defstruct auto_id: 1, entries: HashDict.new
 
-	def new, do: %TodoList{}
+	def new(entries \\ []) do
+		Enum.reduce(
+			entries,
+			%TodoList{},
+			fn(entry, todo_list_acc) ->
+				add_entry(todo_list_acc, entry)
+			end
+		)
+	end
 
 	def add_entry(%TodoList{entries: entries, auto_id: auto_id} = todo_list, entry) do
 		entry = Map.put(entry, :id, auto_id)
