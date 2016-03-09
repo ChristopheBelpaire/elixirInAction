@@ -28,5 +28,18 @@ defmodule TodoListTest do
   	|> TodoList.add_entry(%{date: {2015, 1,1}, title: "Shopping"})
   	|> TodoList.delete_entry(1)
   	assert todo == %TodoList{auto_id: 2, entries: HashDict.new}
+  end
+
+  test "test to_string protocol implementation for todolist" do
+    assert to_string(TodoList.new) == "#TodoList"
   end	
+
+  test "test collectable protocol implementation for todolist" do
+    entries = [
+      %{date: {2013, 12, 19}, title: "Dentist"},
+      %{date: {2013, 12, 20}, title: "Shopping"}
+    ]
+    todo_list = for entry <- entries, into: TodoList.new, do: entry
+    assert todo_list ==  %TodoList{auto_id: 3, entries: HashDict.new |>  HashDict.put(2, %{date: {2013, 12, 20}, id: 2, title: "Shopping"}) |> HashDict.put(1, %{date: {2013, 12, 19}, id: 1, title: "Dentist"})}
+  end
 end
