@@ -10,4 +10,10 @@ defmodule KeyValueStore do
 	def handle_call({:get, key}, state) do
 		{HashDict.get(state, key), state}
 	end	
+
+	def handle_cast({:put, key, value}, state) do
+		HashDict.put(state, key, value)
+	end
+
+
 end
