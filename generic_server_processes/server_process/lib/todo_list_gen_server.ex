@@ -21,4 +21,7 @@ defmodule TodoListGenServer do
 		{:noreply, TodoList.update_entry(todo_list, entry_id, updater_fun)}
 	end
 
+	def start do
+		GenServer.start(TodoListGenServer, nil)
+	end
 end
