@@ -4,6 +4,7 @@ defmodule Todo.CacheTest do
 
   setup do
     File.rm("./persist/My todo list")
+    File.rm("./persist/other todo list")
     :ok
   end
 
@@ -17,6 +18,10 @@ defmodule Todo.CacheTest do
     my_todo_pid = Todo.Cache.server_process(cache_pid, "My todo list")
     GenServer.cast(my_todo_pid, {:add_entry, %{date: {2013, 12, 19}, title: "Dentist"}})
     assert GenServer.call(my_todo_pid, {:entries, {2013, 12, 19}}) == [%{date: {2013, 12, 19}, id: 1, title: "Dentist"}]
+
+    other_todo_pid = Todo.Cache.server_process(cache_pid, "other todo list")
+    GenServer.cast(other_todo_pid, {:add_entry, %{date: {2013, 12, 20}, title: "Yoga"}})
+    assert GenServer.call(other_todo_pid, {:entries, {2013, 12, 20}}) == [%{date: {2013, 12, 20}, id: 1, title: "Yoga"}]
   end
 
 end
