@@ -26,4 +26,12 @@ defmodule Todo.Server do
 	def start(name) do
 		GenServer.start(__MODULE__, name)
 	end
+
+	def entries(pid, date) do
+		GenServer.call(pid, {:entries, date})
+	end
+
+	def add_entry(pid, entry) do
+		GenServer.cast(pid, {:add_entry, entry})
+	end
 end
