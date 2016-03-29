@@ -23,8 +23,8 @@ defmodule Todo.Server do
 		{:noreply, TodoList.update_entry(todo_list, entry_id, updater_fun)}
 	end
 
-	def start(name) do
-		GenServer.start(__MODULE__, name)
+	def start_link(name) do
+		GenServer.start_link(__MODULE__, name)
 	end
 
 	def entries(pid, date) do
