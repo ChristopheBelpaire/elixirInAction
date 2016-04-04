@@ -7,7 +7,7 @@ defmodule Todo.Server do
 	end 
 
 	def via_tuple(name) do
-		{:via, :gproc, {:n, :l,  name}}
+	  {:via, :gproc, {:n, :l, {:todo_server, name}}}
 	end
 
 	def whereis(name) do

@@ -16,9 +16,12 @@ defmodule Todo.CacheTest do
 
     assert Todo.Server.entries(my_todo_pid, {2013, 12, 19}) == [%{date: {2013, 12, 19}, id: 1, title: "Dentist"}]
 
+  end
 
-
-
+  test "create todo list and try to access is twice should return the same pid" do
+    my_todo_pid = Todo.Cache.server_process("My todo list")
+    my_todo_pid_2 = Todo.Cache.server_process("My todo list")
+    assert my_todo_pid == my_todo_pid_2
   end
 
 end
