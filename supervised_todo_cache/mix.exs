@@ -16,7 +16,8 @@ defmodule PersistableTodoCache.Mixfile do
   def application do
     [
       applications: [:logger, :gproc, :cowboy, :plug],
-      mod: {Todo.Application, []}
+      mod: {Todo.Application, []},
+      env: [port: 5454] 
     ]
   end
 
