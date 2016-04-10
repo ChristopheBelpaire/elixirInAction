@@ -3,5 +3,6 @@ defmodule Todo.Application do
 
 	def start(_, _) do
 		Todo.Supervisor.start_link
+		Todo.Web.start_server
 	end
 end

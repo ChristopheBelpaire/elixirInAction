@@ -15,7 +15,7 @@ defmodule PersistableTodoCache.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [
-      applications: [:logger, :gproc],
+      applications: [:logger, :gproc, :cowboy, :plug],
       mod: {Todo.Application, []}
     ]
   end
@@ -31,7 +31,10 @@ defmodule PersistableTodoCache.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:gproc, "0.3.1"}
+      {:gproc, "0.3.1"},
+      {:cowboy, "~> 1.0.0"},
+      {:plug, "~> 1.0"},
+      {:httpoison, "~> 0.8"}
     ]
   end
 end
